@@ -1,9 +1,31 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scenes/Camera.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/Terrain.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/images/HDR/kloofendal_48d_partly_cloudy_2k.hdr" type="Texture" id=3]
+
+[sub_resource type="PanoramaSky" id=1]
+panorama = ExtResource( 3 )
+
+[sub_resource type="Environment" id=2]
+background_mode = 2
+background_sky = SubResource( 1 )
+ambient_light_energy = 1.5
+ambient_light_sky_contribution = 0.5
+tonemap_mode = 2
+tonemap_exposure = 1.5
+tonemap_white = 6.0
 
 [node name="World" type="Spatial"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 2 )
+
+[node name="Sun" type="DirectionalLight" parent="WorldEnvironment"]
+transform = Transform( 0.941093, 0.0703047, -0.330757, 0, 0.978148, 0.207912, 0.338147, -0.195664, 0.920528, 0, 5, 0 )
+light_color = Color( 0.705882, 0.705882, 0.705882, 1 )
+light_energy = 1.8
+shadow_enabled = true
 
 [node name="Camera" parent="." instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 0.961262, 0.275637, 0, -0.275637, 0.961262, 0, 2, 5 )
